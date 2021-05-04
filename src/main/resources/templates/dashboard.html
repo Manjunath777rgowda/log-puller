@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Puller</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link th:href="@{css/dashboard.css}" href="../static/css/dashboard.css" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- create navigation bar ( header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top custom-nav">
+    <a class="navbar-brand" style="color: white" href="#" th:href="@{/dashboard}">Log Puller</a>
+    <a class="navbar-brand logout" style="color: white" href="#" th:href="@{/logout}">Logout</a>
+</nav>
+
+<div class="alert alert-info" th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+<div class="alert alert-danger" th:if="${error}">
+    <h2 th:text="${error}"/>
+</div>
+
+<div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mt-5">
+
+                <form class="logid-form" th:action="@{/getLog}">
+                    <div class="form-group">
+                        <!-- <label for="logId"></label> -->
+                        <input type="text" class="form-control" id="logId" placeholder="Log Id" th:name="logId" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Get Logs</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="table-style">
+    <table class="table table-primary">
+
+        <thead class="ttop">
+        <tr class="table-info">
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Won</th>
+            <th>Lose</th>
+            <th>Played</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="report1, iStat : ${report}" th:style="${iStat.odd}? 'font-weight: normal;'">
+
+            <th th:text="${report1.rank}">rank</th>
+            <th th:text="${report1.userName}">name</th>
+            <th th:text="${report1.won}">won</th>
+            <th th:text="${report1.lose}">lose</th>
+            <th th:text="${report1.played}">played</th>
+        </tr>
+        </tbody>
+    </table>
+</div> -->
+
+
+</body>
+</html>
