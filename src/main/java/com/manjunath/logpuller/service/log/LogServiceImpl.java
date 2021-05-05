@@ -21,7 +21,8 @@ import com.manjunath.logpuller.exceptions.DataException;
 import com.manjunath.logpuller.representation.request.GetLogRequestToGrayLog;
 import com.manjunath.logpuller.representation.request.GrayLogBean;
 import com.manjunath.logpuller.representation.request.ServiceLogNode;
-import com.manjunath.logpuller.restclient.GraylogClient;
+import com.manjunath.logpuller.representation.response.ServiceLogNodeResponse;
+import com.manjunath.logpuller.service.mockgraylog.MockGraylogService;
 import com.manjunath.logpuller.utils.FileUtil;
 import com.manjunath.logpuller.utils.NullEmptyUtils;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
@@ -33,12 +34,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class LogServiceImpl implements LogService {
+    //
+    //    @Autowired
+    //    private GraylogClient graylogClient;
 
     @Autowired
-    private GraylogClient graylogClient;
-
-    //    @Autowired
-    //    private MockGraylogService graylogClient;
+    private MockGraylogService graylogClient;
 
     @Autowired
     private Environment environment;
@@ -55,7 +56,7 @@ public class LogServiceImpl implements LogService {
     //    private static final String nlApplication = "cc65576e-bdd6-4cf1-91e1-84fdd379bfc1";
 
     @Override
-    public ServiceLogNode getLogs( String logId ) throws DataException
+    public ServiceLogNodeResponse getLogs( String logId ) throws DataException
     {
         rootNode = new ServiceLogNode();
         String appFolder = environment.getProperty("app.folder");
@@ -76,25 +77,43 @@ public class LogServiceImpl implements LogService {
         if( NullEmptyUtils.isNullOrEmpty(rootNode.getLogId()) )
             throw new DataException("Invalid Log Id : " + logId, HttpStatus.BAD_REQUEST);
 
-        getChildNodes(rootNode, logId);
+        //creating the response object
+        ServiceLogNodeResponse serviceLogNodeResponse = new ServiceLogNodeResponse();
+        serviceLogNodeResponse.setLogId(logId);
 
+        //updating the child nodes
+        getChildNodes(rootNode, logId, serviceLogNodeResponse);
+
+        //adding the client as the 1st node
         ServiceLogNode serviceLogNode = new ServiceLogNode();
         serviceLogNode.setServiceName(client);
         serviceLogNode.setChildren(Collections.singletonList(rootNode));
-        return serviceLogNode;
+
+        serviceLogNodeResponse.setNodes(serviceLogNode);
+        return serviceLogNodeResponse;
     }
 
-    private void getChildNodes( ServiceLogNode serviceLogNode, String logId ) throws DataException
+    private void getChildNodes( ServiceLogNode serviceLogNode, String logId,
+            ServiceLogNodeResponse serviceLogNodeResponse ) throws DataException
     {
         if( !NullEmptyUtils.isNull(serviceLogNode) )
         {
             getLogsByRequesterId(serviceLogNode);
-            serviceLogNode.setDefault(logId.equals(serviceLogNode.getLogId()));
+
+            if( logId.equals(serviceLogNode.getLogId()) )
+            {
+                serviceLogNode.setDefault(true);
+                serviceLogNodeResponse.setLogId(serviceLogNode.getLogId());
+                serviceLogNodeResponse.setServiceName(serviceLogNode.getServiceName());
+            }
+            else
+                serviceLogNode.setDefault(false);
+
             if( !NullEmptyUtils.isNullOrEmpty(serviceLogNode.getChildren()) )
             {
                 for( ServiceLogNode child : serviceLogNode.getChildren() )
                 {
-                    getChildNodes(child, logId);
+                    getChildNodes(child, logId, serviceLogNodeResponse);
                 }
             }
         }

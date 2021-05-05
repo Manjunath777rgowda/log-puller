@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Puller</title>
@@ -29,10 +30,10 @@
         <div class="col-lg-8 mt-5">
 
             <form class="logid-form" th:action="@{/getLog}">
-                <div
-                        class="form-group">
+                <div class="form-group">
                     <!-- <label for="logId"></label> -->
-                    <input type="text" class="form-control" id="logId" placeholder="Log Id" th:name="logId" required>
+                    <input type="text" class="form-control" id="logId" placeholder="Request Id" th:name="logId"
+                           required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Get Logs</button>
@@ -43,62 +44,96 @@
 </div>
 
 <div class="nodes" th:if="${nodes ne null}">
-    <p th:text="${nodes.logId}"></p>
-    <script th:inline="javascript">
-     var treeData = [[${nodes}]];
 
-    </script>
-    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js}"
-            src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script> <!-- load the d3.js library -->
-    <script type="text/javascript" th:src="@{js/tree.js}" src="../static/js/tree.js"></script>
-</div>
-
-<div class="response-container">
-    <div class="service">
-
-        <div class="client service-contianer">
-            <img class="service-img" src="../static/image/client.png">
-            <span class="service-name">Client</span>
+    <div class="nodes-top">
+        <div class="nodes-header">
+            <h3>Request Id : <span th:text="${nodes.logId}">Request Id </span></h3>
+            <h3>Service Name : <span th:text="${nodes.serviceName}">Service Name</span></h3>
         </div>
+        <div class="node-tree"></div>
 
-        <div class="client service-contianer arrow">
-            <span class="arrow-request">Request</span>
-            <img class="arrow-img" src="../static/image/arrow.png">
-            <span class="arrow-response">Response</span>
-        </div>
-
-        <div class="client service-contianer">
-            <img class="service-img" src="../static/image/server.png">
-            <span class="service-name">Service Name</span>
-        </div>
-
-        <div class="client service-contianer arrow">
-            <span class="arrow-request">Request</span>
-            <img class="arrow-img" src="../static/image/arrow.png">
-            <span class="arrow-response">Response</span>
-        </div>
-
-        <div class="client service-contianer">
-            <img class="service-img" src="../static/image/server.png">
-            <span class="service-name">Service Name</span>
-        </div>
-
-        <div class="client service-contianer arrow">
-            <span class="arrow-request">Request</span>
-            <img class="arrow-img" src="../static/image/arrow.png">
-            <span class="arrow-response">Response</span>
-        </div>
-
-        <div class="client service-contianer">
-            <img class="service-img" src="../static/image/server.png">
-            <span class="service-name">Service Name</span>
-        </div>
+        <script th:inline="javascript">
+            var treeData = [[${ nodes }]];
 
 
+        </script>
+        <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js}"
+                src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+        <!-- load the d3.js library -->
+        <script type="text/javascript" th:src="@{js/tree.js}" src="../static/js/tree.js"></script>
     </div>
 
+    <div class="service-detail">
+        <div class="service-detail-header">
+            <div class="summary activate" id="summary" onclick="activateSummary()">Summary</div>
+            <div class="logs de-activate" id="logs" onclick="activatelogs()">Logs</div>
+        </div>
+
+        <div class="service-detail-body-summary" id="service-detail-body-summary">
+            <table onload="displayData()">
+                <tr>
+                    <th class="align-center">Fields</th>
+                    <th class="align-center">Value</th>
+                </tr>
+                <tr>
+                    <th>Service Name</th>
+                    <td id="service-name-data"></td>
+                </tr>
+                <tr>
+                    <th>Log Id</th>
+                    <td>Service Name</td>
+                </tr>
+                <tr>
+                    <th>Environment</th>
+                    <td>Service Name</td>
+                </tr>
+                <tr>
+                    <th>User Name</th>
+                    <td>Service Name</td>
+                </tr>
+                <tr>
+                    <th>User Id</th>
+                    <td>Service Name</td>
+                </tr>
+                <tr>
+                    <th>Tenant</th>
+                    <td>Service Name</td>
+                </tr>
+
+                <tr>
+                    <th>Request URL</th>
+                    <td>Service Name</td>
+                </tr>
+
+                <tr>
+                    <th>Request Body</th>
+                    <td>Service Name</td>
+                </tr>
+
+                <tr>
+                    <th>Response Body</th>
+                    <td>Service Name</td>
+                </tr>
+
+                <tr>
+                    <th>Response Status Code</th>
+                    <td>Service Name</td>
+                </tr>
+
+                <tr>
+                    <th>Response Status</th>
+                    <td>Service Name</td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="service-detail-body-logs" id="service-detail-body-logs">logs</div>
+    </div>
 </div>
 
-
+<div class="footer">
+    <p>Footer</p>
+</div>
 </body>
+
 </html>

@@ -15,6 +15,15 @@ body {
     background-color: #f5f5f5;
 }
 
+.footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(67, 134, 67);
+    color: white;
+    text-align: center;
+ }
+
 .custom-nav {
     list-style-type: none;
     padding: 0;
@@ -78,7 +87,6 @@ display:none;
 }
 
 .service-contianer{
-   
     width: 15%;
     height: 100%;
     color: rgb(61, 53, 53);
@@ -116,14 +124,31 @@ height: 90%;
 
 .nodes{
     color: black;
-    display: none;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+
+}
+
+.nodes-top{
+    border: gray 1px solid;
+    border-radius: 10px;
+}
+
+.nodes-header{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nodes-header h3{
+    padding: 20px;
+    border: gray 1px solid;
+    border-radius: 10px;
 }
 
 svg{
-    width: 80%;
-    margin-top: 0px;
-    margin-left: 150px; 
-    height: 500px;   
+    width: 85%;
+    margin-left: 15%;
 }
 
 .node {
@@ -132,16 +157,109 @@ svg{
 
 .node circle {
   fill: #fff;
-  stroke: steelblue;
+  stroke: rgb(33, 109, 30);
   stroke-width: 3px;
 }
 
 .node text {
-  font: 12px sans-serif;
+  font: 20px;
 }
 
 .link {
   fill: none;
-  stroke: #ccc;
+  stroke: rgb(199, 153, 25);
   stroke-width: 2px;
+}
+
+.service-detail{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.service-detail-header
+{
+    display: flex;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.summary{
+    width: 50%;
+    border: gray 1px solid;
+    border-radius: 20px 20px 0px 0px;
+    padding: 10px;
+}
+
+.summary:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+.logs{
+    border: gray 1px solid;
+    border-radius: 20px 20px 0px 0px;
+    width: 50%;
+    padding: 10px;
+}
+
+.logs:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+.activate{
+    background-color:  rgb(197, 235, 173);
+    font-weight: bold;
+    border-bottom: none;
+}
+.de-activate{
+    border: gray 1px solid;
+    /* background-color:  rgb(138, 136, 136); */
+}
+
+.service-detail-body-summary{
+    background-color:  rgb(197, 235, 173);
+    border: gray 1px solid;
+    border-top: none;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 600px;
+    overflow: scroll;
+}
+.service-detail-body-logs{
+    background-color:  rgb(197, 235, 173);
+    border: gray 1px solid;
+    border-top: none;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 600px;
+    overflow: scroll;
+    display: none;
+}
+
+table{
+    border: red 1px solid;
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.align-center{
+text-align: center;
+}
+tr{
+    border: red 1px solid;
+    width: 50%;
+
+}
+td{
+    padding: 10px;
+    border: red 1px solid;
+}
+th{
+    width: 50%;
+    padding: 10px;
+    padding-left: 20px;
+    border: red 1px solid;
 }
