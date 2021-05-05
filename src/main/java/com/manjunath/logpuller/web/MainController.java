@@ -3,6 +3,7 @@ package com.manjunath.logpuller.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -10,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.manjunath.logpuller.constants.RestEndPoints;
 import com.manjunath.logpuller.constants.ViewConstants;
 import com.manjunath.logpuller.exceptions.DataException;
-import com.manjunath.logpuller.representation.request.ServiceLogNode;
 import com.manjunath.logpuller.service.log.LogService;
 import com.manjunath.logpuller.utils.NullEmptyUtils;
 
@@ -33,14 +33,15 @@ public class MainController {
     }
 
     @GetMapping( RestEndPoints.GET_LOG )
-    public String getLogs( @RequestParam( value = "logId" ) String logId, RedirectAttributes redirectAttributes )
+    public String getLogs( @RequestParam( value = "logId" ) String logId, RedirectAttributes redirectAttributes,
+            Model model )
     {
         try
         {
             if( NullEmptyUtils.isNullOrEmpty(logId) )
                 throw new DataException("Log Id can not be empty", HttpStatus.BAD_REQUEST);
 
-            ServiceLogNode serviceLogNode = logService.getLogs(logId);
+            model.addAttribute("nodes", logService.getLogs(logId));
             return ViewConstants.DASHBOARD;
         }
         catch( DataException e )

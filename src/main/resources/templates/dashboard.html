@@ -42,6 +42,17 @@
     </div>
 </div>
 
+<div class="nodes" th:if="${nodes ne null}">
+    <p th:text="${nodes.logId}"></p>
+    <script th:inline="javascript">
+     var treeData = [[${nodes}]];
+
+    </script>
+    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js}"
+            src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script> <!-- load the d3.js library -->
+    <script type="text/javascript" th:src="@{js/tree.js}" src="../static/js/tree.js"></script>
+</div>
+
 <div class="response-container">
     <div class="service">
 
@@ -87,33 +98,6 @@
     </div>
 
 </div>
-
-
-<!-- <div class="table-style">
-                    <table class="table table-primary">
-
-                        <thead class="ttop">
-                        <tr class="table-info">
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Won</th>
-                            <th>Lose</th>
-                            <th>Played</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <tr th:each="report1, iStat : ${report}" th:style="${iStat.odd}? 'font-weight: normal;'">
-
-                            <th th:text="${report1.rank}">rank</th>
-                            <th th:text="${report1.userName}">name</th>
-                            <th th:text="${report1.won}">won</th>
-                            <th th:text="${report1.lose}">lose</th>
-                            <th th:text="${report1.played}">played</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div> -->
 
 
 </body>

@@ -1,4 +1,5 @@
 @import 'https://use.fontawesome.com/releases/v5.5.0/css/all.css';
+@namespace svg url(http://www.w3.org/2000/svg);
 body,
 html {
     margin: 0;
@@ -60,6 +61,7 @@ input{
 }
 
 .response-container{
+display:none;
     border: #4caf50 1px solid;
     margin: auto;
     margin-top: 20px;
@@ -111,46 +113,35 @@ height: 90%;
     height: 50%;
     width: 100%;
 }
-/* 
-.textbox {
-    display: flex;
-    width: 50%;
-    overflow: hidden;
-    font-size: 20px;
-    padding: 8px 0;
-    margin: 8px 0;
-    border-bottom: 1px solid #4caf50;
+
+.nodes{
+    color: black;
+    display: none;
 }
 
-.textbox i {
-    width: 26px;
-    float: left;
-    text-align: center;
-}
-
-.textbox input {
-    border: none;
-    outline: none;
-    background: none;
-    color: white;
-    font-size: 18px;
+svg{
     width: 80%;
-    float: left;
-    margin: 0 10px;
-}
-*/
-
-/*
-.custom-file {
-    width: 80%;
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    padding: 20px;
+    margin-top: 0px;
+    margin-left: 150px; 
+    height: 500px;   
 }
 
-.btn-style {
-    font-size: 20px;
-    margin: auto;
-    width: 80%;
-} */
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}

@@ -21,7 +21,7 @@ import com.manjunath.logpuller.exceptions.DataException;
 import com.manjunath.logpuller.representation.request.GetLogRequestToGrayLog;
 import com.manjunath.logpuller.representation.request.GrayLogBean;
 import com.manjunath.logpuller.representation.request.ServiceLogNode;
-import com.manjunath.logpuller.service.mockgraylog.MockGraylogService;
+import com.manjunath.logpuller.restclient.GraylogClient;
 import com.manjunath.logpuller.utils.FileUtil;
 import com.manjunath.logpuller.utils.NullEmptyUtils;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
@@ -34,11 +34,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class LogServiceImpl implements LogService {
 
-    //    @Autowired
-    //    private GraylogClient graylogClient;
-
     @Autowired
-    private MockGraylogService graylogClient;
+    private GraylogClient graylogClient;
+
+    //    @Autowired
+    //    private MockGraylogService graylogClient;
 
     @Autowired
     private Environment environment;
@@ -48,6 +48,7 @@ public class LogServiceImpl implements LogService {
     private static final String children = "children";
     private static final String logIdFiled = "logId";
     private static final String requestId = "requesterId";
+    private static final String client = "CLIENT";
     private ServiceLogNode rootNode;
     //    private static final String catalog = "acdbe21b-edf4-4c63-b5f0-63614731a537";
     //    private static final String apiGateway = "aa198512-f2c7-4353-8de0-89e5faffdb05";
@@ -56,6 +57,7 @@ public class LogServiceImpl implements LogService {
     @Override
     public ServiceLogNode getLogs( String logId ) throws DataException
     {
+        rootNode = new ServiceLogNode();
         String appFolder = environment.getProperty("app.folder");
         File folder = new File(appFolder + logId);
         if( folder.exists() )
@@ -71,12 +73,15 @@ public class LogServiceImpl implements LogService {
         //Find the root node first
         findRootNode(logId);
 
-        if( NullEmptyUtils.isNull(rootNode) )
+        if( NullEmptyUtils.isNullOrEmpty(rootNode.getLogId()) )
             throw new DataException("Invalid Log Id : " + logId, HttpStatus.BAD_REQUEST);
 
         getChildNodes(rootNode, logId);
 
-        return rootNode;
+        ServiceLogNode serviceLogNode = new ServiceLogNode();
+        serviceLogNode.setServiceName(client);
+        serviceLogNode.setChildren(Collections.singletonList(rootNode));
+        return serviceLogNode;
     }
 
     private void getChildNodes( ServiceLogNode serviceLogNode, String logId ) throws DataException
@@ -85,9 +90,9 @@ public class LogServiceImpl implements LogService {
         {
             getLogsByRequesterId(serviceLogNode);
             serviceLogNode.setDefault(logId.equals(serviceLogNode.getLogId()));
-            if( !NullEmptyUtils.isNullOrEmpty(serviceLogNode.getChild()) )
+            if( !NullEmptyUtils.isNullOrEmpty(serviceLogNode.getChildren()) )
             {
-                for( ServiceLogNode child : serviceLogNode.getChild() )
+                for( ServiceLogNode child : serviceLogNode.getChildren() )
                 {
                     getChildNodes(child, logId);
                 }
@@ -143,6 +148,7 @@ public class LogServiceImpl implements LogService {
             ServiceLogNode serviceLogNode = new ServiceLogNode();
             serviceLogNode.setGrayLogBeanList(grayLogBeans);
             serviceLogNode.setLogId(logId);
+            serviceLogNode.setServiceName(grayLogBeans.get(0).getService());
 
             return serviceLogNode;
         }
@@ -187,10 +193,11 @@ public class LogServiceImpl implements LogService {
                 ServiceLogNode childNode = new ServiceLogNode();
                 childNode.setGrayLogBeanList(entry.getValue());
                 childNode.setLogId(entry.getKey());
+                childNode.setServiceName(childNode.getGrayLogBeanList().get(0).getService());
                 childNodeList.add(childNode);
             }
 
-            serviceLogNode.setChild(childNodeList);
+            serviceLogNode.setChildren(childNodeList);
         }
     }
 
