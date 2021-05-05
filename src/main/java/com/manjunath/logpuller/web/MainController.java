@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.manjunath.logpuller.constants.RestEndPoints;
 import com.manjunath.logpuller.constants.ViewConstants;
 import com.manjunath.logpuller.exceptions.DataException;
-import com.manjunath.logpuller.representation.request.GrayLogOutput;
+import com.manjunath.logpuller.representation.request.ServiceLogNode;
 import com.manjunath.logpuller.service.log.LogService;
 import com.manjunath.logpuller.utils.NullEmptyUtils;
 
@@ -40,7 +40,7 @@ public class MainController {
             if( NullEmptyUtils.isNullOrEmpty(logId) )
                 throw new DataException("Log Id can not be empty", HttpStatus.BAD_REQUEST);
 
-            GrayLogOutput grayLogOutput = logService.getLogs(logId);
+            ServiceLogNode serviceLogNode = logService.getLogs(logId);
             return ViewConstants.DASHBOARD;
         }
         catch( DataException e )
