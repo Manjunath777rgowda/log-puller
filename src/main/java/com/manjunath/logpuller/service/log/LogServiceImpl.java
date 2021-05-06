@@ -34,9 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class LogServiceImpl implements LogService {
-    //
-    //    @Autowired
-    //    private GraylogClient graylogClient;
+
+    //        @Autowired
+    //        private GraylogClient graylogClient;
 
     @Autowired
     private MockGraylogService graylogClient;
@@ -46,7 +46,6 @@ public class LogServiceImpl implements LogService {
 
     private static String csvFolder;
     private static String jsonFolder;
-    private static final String children = "children";
     private static final String logIdFiled = "logId";
     private static final String requestId = "requesterId";
     private static final String client = "CLIENT";
@@ -111,13 +110,20 @@ public class LogServiceImpl implements LogService {
 
             for( GrayLogBean grayLogBean : serviceLogNode.getGrayLogBeanList() )
             {
-                //todo analyze and change
                 serviceLogNode.setServiceName(grayLogBean.getService());
-                serviceLogNode.setResponse(grayLogBean.getService());
-                serviceLogNode.setRequest(grayLogBean.getService());
-                serviceLogNode.setStatusResponse("200");
-                serviceLogNode
-                        .setStatusResponse(HttpStatus.valueOf(serviceLogNode.getStatusResponse()).getReasonPhrase());
+
+                if( !NullEmptyUtils.isNullOrEmpty(grayLogBean.getRequest()) )
+                    serviceLogNode.setRequest(grayLogBean.getRequest());
+
+                if( !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponse()) )
+                    serviceLogNode.setResponse(grayLogBean.getResponse());
+
+                if( !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponseCode()) )
+                {
+                    serviceLogNode.setStatusCode(grayLogBean.getResponseCode());
+                    serviceLogNode
+                            .setStatusResponse(HttpStatus.valueOf(serviceLogNode.getStatusCode()).getReasonPhrase());
+                }
             }
 
             if( !NullEmptyUtils.isNullOrEmpty(serviceLogNode.getChildren()) )

@@ -16,7 +16,6 @@ body {
 }
 
 .footer {
-    left: 0;
     bottom: 0;
     width: 100%;
     background-color: rgb(67, 134, 67);
@@ -264,4 +263,8 @@ th {
     padding: 10px;
     padding-left: 20px;
     border: gray 1px solid;
+}
+
+#service-detail-body-logs-table {
+    margin-left: 20px;
 }

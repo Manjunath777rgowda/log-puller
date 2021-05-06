@@ -13,6 +13,7 @@ public class ServiceLogNode {
     private String response;
     private String statusCode;
     private String statusResponse;
+    private String endpoint;
     private boolean isDefault;
     private List<GrayLogBean> grayLogBeanList;
     private List<ServiceLogNode> children;
