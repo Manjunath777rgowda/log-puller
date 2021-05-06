@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     {
         http.authorizeRequests()
                 .antMatchers(RestEndPoints.REGISTRATION + "**", RestEndPoints.LOGIN + "**", RestEndPoints.IMPORT + "**",
-                        RestEndPoints.GET_LOG + "**", "/js/**", "/css/**", "/image/**")
+                        RestEndPoints.GET_LOG + "**", RestEndPoints.DOWNLOAD + "**", "/js/**", "/css/**", "/image/**")
                 .permitAll().anyRequest().authenticated()
 
                 .and().formLogin().successHandler(loginSuccessHandler).failureHandler(loginFailureHandler)

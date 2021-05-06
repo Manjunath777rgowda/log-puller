@@ -15,6 +15,12 @@ body {
     background-color: #f5f5f5;
 }
 
+a {
+    height: auto;
+    margin: 0px;
+    font-size: 30px;
+}
+
 .footer {
     bottom: 0;
     width: 100%;
@@ -51,8 +57,12 @@ body {
     width: 100%;
 }
 
+.button-flex {
+    display: flex;
+    width: 100%;
+}
+
 .btn {
-    width: 20%;
     background-color: #4caf50;
     color: white;
     font-size: 18px;
@@ -248,14 +258,10 @@ table {
     border: gray 1px solid;
 }
 
-tr {
-    /* border-top: red 1px solid; */
-    width: 50%;
-}
-
 td {
     padding: 10px;
     border: gray 1px solid;
+    /* overflow: scroll; */
 }
 
 th {
@@ -267,4 +273,5 @@ th {
 
 #service-detail-body-logs-table {
     margin-left: 20px;
+    margin-right: 20px;
 }

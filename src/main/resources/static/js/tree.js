@@ -1,83 +1,138 @@
 var example = {
-    "logId": "2",
-    "serviceName": null,
-    "statusCode": 500,
+    "logId": "ff2b4d49-d6cc-464c-8a52-a016ed5ef023",
+    "serviceName": "NL-API-GATEWAY",
     "nodes": {
         "logId": null,
         "serviceName": "CLIENT",
         "request": null,
         "response": null,
+        "statusCode": null,
+        "statusResponse": null,
+        "endpoint": null,
         "grayLogBeanList": null,
         "children": [{
-            "logId": "2",
+            "logId": "ff2b4d49-d6cc-464c-8a52-a016ed5ef023",
             "serviceName": "NL-API-GATEWAY",
             "request": null,
             "response": null,
-            "statusCode": 200,
+            "statusCode": null,
+            "statusResponse": null,
+            "endpoint": null,
             "grayLogBeanList": [{
                 "server": "manjunathr",
                 "requesterId": "",
                 "loggerLevel": "INFO",
                 "ip": "ip6-localhost",
-                "requestMethod": "POST",
+                "requestMethod": "GET",
                 "className": "com.middleware.nuvelink.apigateway.config.InboundOutboundLoggingFilter",
                 "simpleClassName": "InboundOutboundLoggingFilter",
                 "source": "localhost",
-                "message": "Inbound Request : {\"endpoint\":\"http://localhost:8081/api/v1/catalogs/ftp/retrieve\",\"requestMethod\":\"POST\",\"ip\":\"ip6-localhost\",\"userId\":\"d82a25ad-0927-4b81-891c-62f6ebf1392c\",\"tenant\":\"admin\",\"username\":\"admin\"}",
-                "userId": "d82a25ad-0927-4b81-891c-62f6ebf1392c",
-                "endpoint": "http://localhost:8081/api/v1/catalogs/ftp/retrieve",
+                "message": "Inbound Request : {\"endpoint\":\"http://localhost:8081/api/v1/admin/users?pageNumber=1&pageSize=1&sortBy=username&sortType=ASCENDING\",\"requestMethod\":\"GET\",\"ip\":\"ip6-localhost\",\"userId\":\"a79fe6a6-ff3c-4192-890a-5022de787bde\",\"tenant\":\"mycompany1\",\"use",
+                "userId": "a79fe6a6-ff3c-4192-890a-5022de787bde",
+                "endpoint": "http://localhost:8081/api/v1/admin/users?pageNumber=1&pageSize=1&sortBy=username&sortType=ASCENDING",
+                "request": null,
+                "response": null,
+                "responseCode": null,
                 "environment": "local",
                 "server_fqdn": "manjunathr",
-                "full_message": "Inbound Request : {\"endpoint\":\"http://localhost:8081/api/v1/catalogs/ftp/retrieve\",\"requestMethod\":\"POST\",\"ip\":\"ip6-localhost\",\"userId\":\"d82a25ad-0927-4b81-891c-62f6ebf1392c\",\"tenant\":\"admin\",\"username\":\"admin\"}",
+                "full_message": "Inbound Request : {\"endpoint\":\"http://localhost:8081/api/v1/admin/users?pageNumber=1&pageSize=1&sortBy=username&sortType=ASCENDING\",\"requestMethod\":\"GET\",\"ip\":\"ip6-localhost\",\"userId\":\"a79fe6a6-ff3c-4192-890a-5022de787bde\",\"tenant\":\"mycompany1\",\"username\":\"mycompany1_admin\"}",
                 "service": "NL-API-GATEWAY",
-                "logId": "2",
+                "logId": "ff2b4d49-d6cc-464c-8a52-a016ed5ef023",
                 "facility": "logstash-gelf",
-                "inbound_json": "{\"endpoint\":\"http://localhost:8081/api/v1/catalogs/ftp/retrieve\",\"requestMethod\":\"POST\",\"ip\":\"ip6-localhost\",\"userId\":\"d82a25ad-0927-4b81-891c-62f6ebf1392c\",\"tenant\":\"admin\",\"username\":\"admin\"}",
-                "tenant": "admin",
-                "timestamp": "2021-05-03T12:50:13.395Z",
-                "username": "admin",
+                "inbound_json": "{\"endpoint\":\"http://localhost:8081/api/v1/admin/users?pageNumber=1&pageSize=1&sortBy=username&sortType=ASCENDING\",\"requestMethod\":\"GET\",\"ip\":\"ip6-localhost\",\"userId\":\"a79fe6a6-ff3c-4192-890a-5022de787bde\",\"tenant\":\"mycompany1\",\"username\":\"mycompany1_admin\"}",
+                "tenant": "mycompany1",
+                "timestamp": "2021-05-03T12:30:17.593Z",
+                "username": "mycompany1_admin",
                 "stackTrace": ""
             }],
             "children": [{
-                "logId": "3",
-                "serviceName": "NL-CATALOG",
+                "logId": "b855dd43-b9f3-42d7-9fb3-c05811583a17",
+                "serviceName": "NL-ADMIN-API",
                 "request": null,
                 "response": null,
-                "statusCode": 500,
-                "grayLogBeanList": [
-                    {}
-                ],
-                "children": [{
-                    "logId": "4",
-                    "serviceName": "NL-APPLICATION-1",
+                "statusCode": null,
+                "statusResponse": null,
+                "endpoint": null,
+                "grayLogBeanList": [{
+                    "server": "manjunathr",
+                    "requesterId": "ff2b4d49-d6cc-464c-8a52-a016ed5ef023",
+                    "loggerLevel": "INFO",
+                    "ip": "",
+                    "requestMethod": "",
+                    "className": "com.middleware.nuvelink.commons.config.webconfig.RequestInterceptor",
+                    "simpleClassName": "RequestInterceptor",
+                    "source": "localhost",
+                    "message": "Principal : Principal(userName=mycompany1_admin, userId=a79fe6a6-ff3c-4192-890a-5022de787bde, email=mycompany1_admin@gmail.com, tenantName=mycompany1, accessToken=Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkTjBDdnRrUTR1NGt2WTFZbXFDMWV",
+                    "userId": "",
+                    "endpoint": "",
                     "request": null,
                     "response": null,
-                    "grayLogBeanList": [
-                        {}
-                    ],
-                    "children": null,
-                    "default": false
+                    "responseCode": null,
+                    "environment": "local",
+                    "server_fqdn": "manjunathr",
+                    "full_message": "Principal : Principal(userName=mycompany1_admin, userId=a79fe6a6-ff3c-4192-890a-5022de787bde, email=mycompany1_admin@gmail.com, tenantName=mycompany1, accessToken=Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkTjBDdnRrUTR1NGt2WTFZbXFDMWVFUV9PcXRobFp3UV9fUVNOQVpSSEw0In0.eyJleHAiOjE2MjAwNDg0MDgsImlhdCI6MTYyMDA0NDgwOCwianRpIjoiNmE5ZDE2ZjktNDgwOC00YjMxLTk1MDMtYmQxZDNjMGRhMmIyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL051dmVwcm8iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImFjY291bnQiXSwic3ViIjoiYTc5ZmU2YTYtZmYzYy00MTkyLTg5MGEtNTAyMmRlNzg3YmRlIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWRtaW4tY2xpIiwic2Vzc2lvbl9zdGF0ZSI6ImNiOWYxYTIxLTAyZjMtNDFjNy1hODEzLTEwMmQ4NzQyMTJiNiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiY29tcGFueV9vd25lciIsImdyb3VwX2FkbWluIiwib2ZmbGluZV9hY2Nlc3MiLCJjb21wYW55X2FkbWluIiwidW1hX2F1dGhvcml6YXRpb24iLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgZ3JvdXAgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6Im15Y29tcGFueTEgYWRtaW4iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJteWNvbXBhbnkxX2FkbWluIiwiZ2l2ZW5fbmFtZSI6Im15Y29tcGFueTEiLCJsb2NhbGUiOiJlbiIsImZhbWlseV9uYW1lIjoiYWRtaW4iLCJlbWFpbCI6Im15Y29tcGFueTFfYWRtaW5AZ21haWwuY29tIiwiZ3JvdXAiOlsiL215Y29tcGFueTEvYWRtaW5zL2NvbXBhbnlfb3duZXIiLCIvbXljb21wYW55MSJdfQ.Qh1QvweRZY1IJEx-OALvaK7XN3eElcRdttQNNG5VYyYVHZrXMGhl283hreX1Zs8w7Zrq0FZQaSrHOnfTuY2EXJP34y-_caQ9m0Xoc1AYwMCiNVsOCIJnAaA1Tw0q2EdkDDXoJTmwk213Y3i2lV9LlpBr8q-9codxRUJnzG1hmdGOztO4JUOcWdtvnnSJoKFWgislZeICxRn6cGJ8n1R1Ee02d7odeaod8V-rM9Q9cd4jj1HaZSv8YsM4EGlpLytoI0ZULJ5acoNicO1k3a74nhcMePkeYYpj9yrcZFJEJNz_NiUQVM-98_5PVT1UivZn8X-rKvM08uQ_PCuocl2uvQ, isAdmin=false, locale=en)",
+                    "service": "NL-ADMIN-API",
+                    "logId": "b855dd43-b9f3-42d7-9fb3-c05811583a17",
+                    "facility": "logstash-gelf",
+                    "inbound_json": "",
+                    "tenant": "",
+                    "timestamp": "2021-05-03T12:30:17.630Z",
+                    "username": "",
+                    "stackTrace": ""
                 }, {
-                    "logId": "5",
-                    "serviceName": "NL-APPLICATION-2",
+                    "server": "manjunathr",
+                    "requesterId": "ff2b4d49-d6cc-464c-8a52-a016ed5ef023",
+                    "loggerLevel": "TRACE",
+                    "ip": "",
+                    "requestMethod": "",
+                    "className": "org.hibernate.type.descriptor.sql.BasicBinder",
+                    "simpleClassName": "BasicBinder",
+                    "source": "localhost",
+                    "message": "binding parameter [1] as [VARCHAR] - [mycompany1]",
+                    "userId": "",
+                    "endpoint": "",
                     "request": null,
                     "response": null,
-                    "grayLogBeanList": [
-                        {}
-                    ],
-                    "children": null,
-                    "default": false
+                    "responseCode": null,
+                    "environment": "local",
+                    "server_fqdn": "manjunathr",
+                    "full_message": "binding parameter [1] as [VARCHAR] - [mycompany1]",
+                    "service": "NL-ADMIN-API",
+                    "logId": "b855dd43-b9f3-42d7-9fb3-c05811583a17",
+                    "facility": "logstash-gelf",
+                    "inbound_json": "",
+                    "tenant": "",
+                    "timestamp": "2021-05-03T12:30:17.643Z",
+                    "username": "",
+                    "stackTrace": ""
                 }, {
-                    "logId": "6",
-                    "serviceName": "NL-APPLICATION-3",
+                    "server": "manjunathr",
+                    "requesterId": "ff2b4d49-d6cc-464c-8a52-a016ed5ef023",
+                    "loggerLevel": "DEBUG",
+                    "ip": "",
+                    "requestMethod": "",
+                    "className": "org.hibernate.engine.jdbc.spi.SqlStatementLogger",
+                    "simpleClassName": "SqlStatementLogger",
+                    "source": "localhost",
+                    "message": "select tenantenti0_.tenant_id as tenant_i1_2_, tenantenti0_.created_at as created_2_2_, tenantenti0_.created_by as created_3_2_, tenantenti0_.modified_at as modified4_2_, tenantenti0_.modified_by as modified5_2_, tenantenti0_.deleted_on as deleted_6",
+                    "userId": "",
+                    "endpoint": "",
                     "request": null,
                     "response": null,
-                    "grayLogBeanList": [
-                        {}
-                    ],
-                    "children": null,
-                    "default": false
+                    "responseCode": null,
+                    "environment": "local",
+                    "server_fqdn": "manjunathr",
+                    "full_message": "select tenantenti0_.tenant_id as tenant_i1_2_, tenantenti0_.created_at as created_2_2_, tenantenti0_.created_by as created_3_2_, tenantenti0_.modified_at as modified4_2_, tenantenti0_.modified_by as modified5_2_, tenantenti0_.deleted_on as deleted_6_2_, tenantenti0_.description as descript7_2_, tenantenti0_.display_name as display_8_2_, tenantenti0_.locale as locale9_2_, tenantenti0_.owner_id as owner_i10_2_, tenantenti0_.tenant_name as tenant_11_2_, tenantenti0_.tenant_status as tenant_12_2_, tenantenti0_.user_limit as user_li13_2_ from tenant_entity tenantenti0_ where tenantenti0_.tenant_name=?",
+                    "service": "NL-ADMIN-API",
+                    "logId": "b855dd43-b9f3-42d7-9fb3-c05811583a17",
+                    "facility": "logstash-gelf",
+                    "inbound_json": "",
+                    "tenant": "",
+                    "timestamp": "2021-05-03T12:30:17.639Z",
+                    "username": "",
+                    "stackTrace": ""
                 }],
+                "children": null,
                 "default": false
             }],
             "default": true
@@ -85,7 +140,6 @@ var example = {
         "default": false
     }
 };
-
 // var treeData = "";
 
 var defaultNode;
@@ -355,6 +409,8 @@ function displayData(data) {
 
     var element = document.getElementById("url-data");
     element.innerHTML = data.endpoint ? data.endpoint : "";
+
+    createTable(data);
 }
 
 function resetData() {
@@ -398,129 +454,143 @@ function resetData() {
 }
 
 function createTable(data) {
+    var div = document.getElementById("service-detail-body-logs-table");
+    div.innerHTML = "";
+
     var table = document.getElementById("service-detail-body-logs-table");
 
-    if (data) {
+
+    if (data.grayLogBeanList) {
         var rowNumber = 0;
         var colNumber = 0;
 
         var row = table.insertRow(rowNumber);
         var cell = row.insertCell(colNumber);
-        cell.innerHTML = "Timestamp";
+        cell.innerHTML = "<b>Timestamp</b>";
+        cell.classList.add("timestamp");
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "service";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Service</b>";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Log Id";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Log Id";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Requester Id";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Requester Id";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Server";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Server";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Logger Level";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Logger Level";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Ip";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Ip";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Request Method";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Request Method";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Class Name";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Class Name";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Simple Class Name";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Simple Class Name";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Source";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Source";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Message";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Message";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Full Message";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Full Message";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Tenant";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Tenant";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "User Id";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>User Id";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "User Name";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>User Name";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Endpoint";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Endpoint";
 
-        var cell = row.insertCell(colNumber + 1);
-        cell.innerHTML = "Response";
+        var cell = row.insertCell(++colNumber);
+        cell.innerHTML = "<b>Response";
 
-        for (var j = 1; j <= data.grayLogBeanList.length; j++) {
+        data.grayLogBeanList.forEach(function(object, index) {
 
-            var bean = data.grayLogBeanList[j - 1];
+            colNumber = 0;
 
-            var colNumber = 0;
+            var bean = object;
 
-            debugger
-            var row = table.insertRow(j);
+            var row = table.insertRow(index + 1);
             var cell = row.insertCell(colNumber);
             cell.innerHTML = bean.timestamp;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "service";
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Log Id";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.service;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Requester Id";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.logId;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Server";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.requesterId;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Logger Level";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.server;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Ip";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.loggerLevel;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Request Method";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.ip;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Class Name";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.requestMethod;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Simple Class Name";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.className;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Source";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.simpleClassName;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Message";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.source;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Full Message";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.message;
+            cell.style.overflow = "scroll";
+            cell.style.maxWidth = "500px";
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Tenant";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.full_message;
+            cell.style.overflow = "scroll";
+            cell.style.maxWidth = "500px";
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "User Id";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.tenant;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "User Name";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.userId;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Endpoint";
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.username;
 
-            var cell = row.insertCell(colNumber + 1);
-            cell.innerHTML = "Response";
-        }
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.endpoint;
 
+            var cell = row.insertCell(++colNumber);
+            cell.innerHTML = bean.response;
+        });
+
+    } else {
+        div.style.border = "none";
+        div.style.fontSize = "80px";
+        div.style.textAlign = "center";
+        div.innerHTML = "Oops!!.. No Logs Found!";
     }
 }

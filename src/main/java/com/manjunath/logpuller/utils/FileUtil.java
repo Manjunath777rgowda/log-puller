@@ -2,14 +2,14 @@
 
 package com.manjunath.logpuller.utils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.MDC;
@@ -178,6 +178,65 @@ public class FileUtil {
         {
             log.error("Error while reading file", e);
             throw new DataException(ErrorMessages.ERROR_WHILE_READING_FILE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    private static void zipFiles( File fileToZip, String fileName, ZipOutputStream zipOut ) throws IOException
+    {
+        if( fileToZip.isHidden() )
+        {
+            return;
+        }
+        if( fileToZip.isDirectory() )
+        {
+            if( fileName.endsWith("/") )
+            {
+                zipOut.putNextEntry(new ZipEntry(fileName));
+                zipOut.closeEntry();
+            }
+            else
+            {
+                zipOut.putNextEntry(new ZipEntry(fileName + "/"));
+                zipOut.closeEntry();
+            }
+            File[] children = fileToZip.listFiles();
+            for( File childFile : children )
+            {
+                zipFiles(childFile, fileName + "/" + childFile.getName(), zipOut);
+            }
+            return;
+        }
+        FileInputStream fis = new FileInputStream(fileToZip);
+        ZipEntry zipEntry = new ZipEntry(fileName);
+        zipOut.putNextEntry(zipEntry);
+        byte[] bytes = new byte[1024];
+        int length;
+        while( (length = fis.read(bytes)) >= 0 )
+        {
+            zipOut.write(bytes, 0, length);
+        }
+        fis.close();
+    }
+
+    public static File zipFile( String sourceFile ) throws DataException
+    {
+        try
+        {
+            FileOutputStream fos = new FileOutputStream(sourceFile + ".zip");
+
+            ZipOutputStream zipOut = new ZipOutputStream(fos);
+            File fileToZip = new File(sourceFile);
+
+            zipFiles(fileToZip, fileToZip.getName(), zipOut);
+            zipOut.close();
+            fos.close();
+
+            return new File(sourceFile + ".zip");
+        }
+        catch( Exception e )
+        {
+            log.error("Error while Zipping file", e);
+            throw new DataException("Error while zipping file", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

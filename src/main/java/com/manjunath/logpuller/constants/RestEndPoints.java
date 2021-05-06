@@ -12,5 +12,6 @@ public class RestEndPoints {
     public static final String REPORT = "/report";
     public static final String DASHBOARD = "/dashboard";
     public static final String GET_LOG = "/getLog";
+    public static final String DOWNLOAD = "/download";
 
 }
