@@ -11,7 +11,7 @@ html {
 body {
     padding-top: 70px;
     color: white;
-    background-color:red;
+    background-color: red;
     background-color: #f5f5f5;
 }
 
@@ -22,7 +22,7 @@ body {
     background-color: rgb(67, 134, 67);
     color: white;
     text-align: center;
- }
+}
 
 .custom-nav {
     list-style-type: none;
@@ -65,19 +65,19 @@ body {
     height: 50px;
 }
 
-input{
-  margin: 0%;
+input {
+    margin: 0%;
 }
 
-.response-container{
-display:none;
+.response-container {
+    display: none;
     border: #4caf50 1px solid;
     margin: auto;
     margin-top: 20px;
     width: 90%;
 }
 
-.service{
+.service {
     border: red 1px solid;
     width: 100%;
     height: 200px;
@@ -86,7 +86,7 @@ display:none;
     align-items: center;
 }
 
-.service-contianer{
+.service-contianer {
     width: 15%;
     height: 100%;
     color: rgb(61, 53, 53);
@@ -94,16 +94,16 @@ display:none;
     text-align: center;
 }
 
-.service-img{
-width: 100%;
-height: 90%;
+.service-img {
+    width: 100%;
+    height: 90%;
 }
 
-.service-name{
+.service-name {
     margin: auto;
-   
 }
-.arrow{
+
+.arrow {
     margin-left: 10px;
     margin-right: 10px;
     height: 100%;
@@ -112,41 +112,39 @@ height: 90%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
-.arrow-img{
+.arrow-img {
     padding-top: 20px;
     padding-bottom: 20px;
     height: 50%;
     width: 100%;
 }
 
-.nodes{
+.nodes {
     color: black;
     width: 80%;
     margin: auto;
     margin-top: 20px;
-
 }
 
-.nodes-top{
+.nodes-top {
     border: gray 1px solid;
     border-radius: 10px;
 }
 
-.nodes-header{
+.nodes-header {
     display: flex;
     justify-content: space-around;
 }
 
-.nodes-header h3{
+.nodes-header h3 {
     padding: 20px;
     border: gray 1px solid;
     border-radius: 10px;
 }
 
-svg{
+svg {
     width: 85%;
     margin-left: 15%;
 }
@@ -156,35 +154,34 @@ svg{
 }
 
 .node circle {
-  fill: #fff;
-  stroke: rgb(33, 109, 30);
-  stroke-width: 3px;
+    fill: #fff;
+    stroke: rgb(33, 109, 30);
+    stroke-width: 3px;
 }
 
 .node text {
-  font: 20px;
+    font: 20px;
 }
 
 .link {
-  fill: none;
-  stroke: rgb(199, 153, 25);
-  stroke-width: 2px;
+    fill: none;
+    stroke: rgb(199, 153, 25);
+    stroke-width: 2px;
 }
 
-.service-detail{
+.service-detail {
     margin-top: 10px;
     margin-bottom: 50px;
 }
 
-.service-detail-header
-{
+.service-detail-header {
     display: flex;
     width: 100%;
     text-align: center;
     font-size: 20px;
 }
 
-.summary{
+.summary {
     width: 50%;
     border: gray 1px solid;
     border-radius: 20px 20px 0px 0px;
@@ -194,9 +191,9 @@ svg{
 .summary:hover {
     cursor: pointer;
     font-weight: bold;
-  }
+}
 
-.logs{
+.logs {
     border: gray 1px solid;
     border-radius: 20px 20px 0px 0px;
     width: 50%;
@@ -206,20 +203,20 @@ svg{
 .logs:hover {
     cursor: pointer;
     font-weight: bold;
-  }
+}
 
-.activate{
-    background-color:  rgb(197, 235, 173);
+.activate {
+    background-color: rgb(197, 235, 173);
     font-weight: bold;
     border-bottom: none;
 }
-.de-activate{
+
+.de-activate {
     border: gray 1px solid;
-    /* background-color:  rgb(138, 136, 136); */
 }
 
-.service-detail-body-summary{
-    background-color:  rgb(197, 235, 173);
+.service-detail-body-summary {
+    background-color: rgb(197, 235, 173);
     border: gray 1px solid;
     border-top: none;
     padding-top: 50px;
@@ -227,8 +224,9 @@ svg{
     height: 600px;
     overflow: scroll;
 }
-.service-detail-body-logs{
-    background-color:  rgb(197, 235, 173);
+
+.service-detail-body-logs {
+    background-color: rgb(197, 235, 173);
     border: gray 1px solid;
     border-top: none;
     padding-top: 50px;
@@ -238,28 +236,32 @@ svg{
     display: none;
 }
 
-table{
-    border: red 1px solid;
+table {
+    border-radius: 20px;
+    border: gray 1px solid;
     width: 80%;
     margin: auto;
     padding-top: 20px;
 }
 
-.align-center{
-text-align: center;
+.align-center {
+    text-align: center;
+    border: gray 1px solid;
 }
-tr{
-    border: red 1px solid;
-    width: 50%;
 
+tr {
+    /* border-top: red 1px solid; */
+    width: 50%;
 }
-td{
+
+td {
     padding: 10px;
-    border: red 1px solid;
+    border: gray 1px solid;
 }
-th{
+
+th {
     width: 50%;
     padding: 10px;
     padding-left: 20px;
-    border: red 1px solid;
+    border: gray 1px solid;
 }

@@ -109,6 +109,17 @@ public class LogServiceImpl implements LogService {
             else
                 serviceLogNode.setDefault(false);
 
+            for( GrayLogBean grayLogBean : serviceLogNode.getGrayLogBeanList() )
+            {
+                //todo analyze and change
+                serviceLogNode.setServiceName(grayLogBean.getService());
+                serviceLogNode.setResponse(grayLogBean.getService());
+                serviceLogNode.setRequest(grayLogBean.getService());
+                serviceLogNode.setStatusResponse("200");
+                serviceLogNode
+                        .setStatusResponse(HttpStatus.valueOf(serviceLogNode.getStatusResponse()).getReasonPhrase());
+            }
+
             if( !NullEmptyUtils.isNullOrEmpty(serviceLogNode.getChildren()) )
             {
                 for( ServiceLogNode child : serviceLogNode.getChildren() )
