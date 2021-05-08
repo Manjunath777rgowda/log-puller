@@ -321,22 +321,25 @@ window.onload = function() {
     element.innerHTML = defaultNode.logId ? defaultNode.logId : "";
 
     var element = document.getElementById("request-body-data");
-    element.innerHTML = defaultNode.request ? defaultNode.request : "";
+    element.innerHTML = defaultNode.requestBody ? defaultNode.requestBody : "";
+
+    var element = document.getElementById("request-params-data");
+    element.innerHTML = defaultNode.requestParams ? defaultNode.requestParams : "";
 
     var element = document.getElementById("response-data");
-    element.innerHTML = defaultNode.response ? defaultNode.response : "";
+    element.innerHTML = defaultNode.responseBody ? defaultNode.responseBody : "";
 
     var element = document.getElementById("status-data");
-    element.innerHTML = defaultNode.stautsData ? defaultNode.stautsData : "";
+    element.innerHTML = defaultNode.responseStatus ? defaultNode.responseStatus : "";
 
     var element = document.getElementById("status-code-data");
-    element.innerHTML = defaultNode.statusCode ? defaultNode.statusCode : "";
+    element.innerHTML = defaultNode.responseCode ? defaultNode.responseCode : "";
 
 
-    if (defaultNode.statusCode) {
-        element.innerHTML = defaultNode.statusCode;
+    if (defaultNode.responseCode) {
+        element.innerHTML = defaultNode.responseCode;
 
-        if (defaultNode.statusCode != 200) {
+        if (defaultNode.responseCode != 200) {
             element.style.backgroundColor = "#f3b9b9";
         }
     }
@@ -354,7 +357,7 @@ window.onload = function() {
     element.innerHTML = defaultNode.userId ? defaultNode.userId : "";
 
     var element = document.getElementById("tenant-data");
-    element.innerHTML = defaultNode.tenant ? defaultNode.userId : "";
+    element.innerHTML = defaultNode.tenant ? defaultNode.tenant : "";
 
     var element = document.getElementById("url-data");
     element.innerHTML = defaultNode.endpoint ? defaultNode.endpoint : "";
@@ -374,20 +377,22 @@ function displayData(data) {
     element.innerHTML = data.logId ? data.logId : "";
 
     var element = document.getElementById("request-body-data");
-    element.innerHTML = data.request ? data.request : "";
+    element.innerHTML = data.requestBody ? data.requestBody : "";
+
+    var element = document.getElementById("request-params-data");
+    element.innerHTML = data.requestParams ? data.requestParams : "";
 
     var element = document.getElementById("response-data");
-    element.innerHTML = data.response ? data.response : "";
+    element.innerHTML = data.responseBody ? data.responseBody : "";
 
     var element = document.getElementById("status-data");
-    element.innerHTML = data.stautsData ? data.stautsData : "";
+    element.innerHTML = data.responseStatus ? defaultNode.responseStatus : "";
 
     var element = document.getElementById("status-code-data");
+    if (data.responseCode) {
+        element.innerHTML = data.responseCode;
 
-    if (data.statusCode) {
-        element.innerHTML = data.statusCode;
-
-        if (data.statusCode != 200) {
+        if (data.responseCode != 200) {
             element.style.backgroundColor = "#f3b9b9";
         }
     }
@@ -405,7 +410,7 @@ function displayData(data) {
     element.innerHTML = data.userId ? data.userId : "";
 
     var element = document.getElementById("tenant-data");
-    element.innerHTML = data.tenant ? data.userId : "";
+    element.innerHTML = data.tenant ? data.tenant : "";
 
     var element = document.getElementById("url-data");
     element.innerHTML = data.endpoint ? data.endpoint : "";
@@ -422,6 +427,9 @@ function resetData() {
     element.innerHTML = "";
 
     var element = document.getElementById("request-body-data");
+    element.innerHTML = "";
+
+    var element = document.getElementById("request-params-data");
     element.innerHTML = "";
 
     var element = document.getElementById("response-data");
@@ -465,6 +473,7 @@ function createTable(data) {
         var colNumber = 0;
 
         var row = table.insertRow(rowNumber);
+
         var cell = row.insertCell(colNumber);
         cell.innerHTML = "<b>Timestamp</b>";
         cell.classList.add("timestamp");
@@ -527,6 +536,11 @@ function createTable(data) {
             var bean = object;
 
             var row = table.insertRow(index + 1);
+
+            if (bean.loggerLevel == "ERROR") {
+                row.style.backgroundColor = "#f3b9b9";
+            }
+
             var cell = row.insertCell(colNumber);
             cell.innerHTML = bean.timestamp;
 
@@ -584,7 +598,7 @@ function createTable(data) {
             cell.innerHTML = bean.endpoint;
 
             var cell = row.insertCell(++colNumber);
-            cell.innerHTML = bean.response;
+            cell.innerHTML = bean.responseBody;
         });
 
     } else {

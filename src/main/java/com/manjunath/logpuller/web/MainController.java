@@ -67,7 +67,7 @@ public class MainController {
 
     @GetMapping( RestEndPoints.DOWNLOAD )
     public String download( @RequestParam( value = "logId" ) String logId, RedirectAttributes redirectAttributes,
-            Model model, HttpServletResponse response )
+            HttpServletResponse response )
     {
         try
         {
@@ -122,8 +122,6 @@ public class MainController {
                 FileCopyUtils.copy(inputStream, response.getOutputStream());
 
             }
-
-            model.addAttribute("nodes", logService.getLogs(logId));
             return ViewConstants.DASHBOARD;
         }
         catch( DataException e )

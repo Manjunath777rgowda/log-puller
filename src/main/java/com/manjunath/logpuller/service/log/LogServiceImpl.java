@@ -22,7 +22,7 @@ import com.manjunath.logpuller.representation.request.GetLogRequestToGrayLog;
 import com.manjunath.logpuller.representation.request.GrayLogBean;
 import com.manjunath.logpuller.representation.request.ServiceLogNode;
 import com.manjunath.logpuller.representation.response.ServiceLogNodeResponse;
-import com.manjunath.logpuller.service.mockgraylog.MockGraylogService;
+import com.manjunath.logpuller.restclient.GraylogClient;
 import com.manjunath.logpuller.utils.FileUtil;
 import com.manjunath.logpuller.utils.NullEmptyUtils;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
@@ -35,11 +35,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class LogServiceImpl implements LogService {
 
-    //        @Autowired
-    //        private GraylogClient graylogClient;
-
     @Autowired
-    private MockGraylogService graylogClient;
+    private GraylogClient graylogClient;
+    //
+    //    @Autowired
+    //    private MockGraylogService graylogClient;
 
     @Autowired
     private Environment environment;
@@ -50,9 +50,6 @@ public class LogServiceImpl implements LogService {
     private static final String requestId = "requesterId";
     private static final String client = "CLIENT";
     private ServiceLogNode rootNode;
-    //    private static final String catalog = "acdbe21b-edf4-4c63-b5f0-63614731a537";
-    //    private static final String apiGateway = "aa198512-f2c7-4353-8de0-89e5faffdb05";
-    //    private static final String nlApplication = "cc65576e-bdd6-4cf1-91e1-84fdd379bfc1";
 
     @Override
     public ServiceLogNodeResponse getLogs( String logId ) throws DataException
@@ -112,18 +109,49 @@ public class LogServiceImpl implements LogService {
             {
                 serviceLogNode.setServiceName(grayLogBean.getService());
 
-                if( !NullEmptyUtils.isNullOrEmpty(grayLogBean.getRequest()) )
-                    serviceLogNode.setRequest(grayLogBean.getRequest());
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getRequestBody())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getRequestBody()) )
+                    serviceLogNode.setRequestBody(grayLogBean.getRequestBody());
 
-                if( !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponse()) )
-                    serviceLogNode.setResponse(grayLogBean.getResponse());
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getRequestParams())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getRequestParams()) )
+                    serviceLogNode.setRequestParams(grayLogBean.getRequestParams());
 
-                if( !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponseCode()) )
-                {
-                    serviceLogNode.setStatusCode(grayLogBean.getResponseCode());
-                    serviceLogNode
-                            .setStatusResponse(HttpStatus.valueOf(serviceLogNode.getStatusCode()).getReasonPhrase());
-                }
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getResponseBody())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponseBody()) )
+                    serviceLogNode.setResponseBody(grayLogBean.getResponseBody());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getResponseCode())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponseCode()) )
+                    serviceLogNode.setResponseCode(grayLogBean.getResponseCode());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getResponseStatus())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getResponseStatus()) )
+                    serviceLogNode.setResponseStatus(grayLogBean.getResponseStatus());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getEndpoint())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getEndpoint()) )
+                    serviceLogNode.setEndpoint(grayLogBean.getEndpoint());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getUserId())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getUserId()) )
+                    serviceLogNode.setUserId(grayLogBean.getUserId());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getUsername())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getUsername()) )
+                    serviceLogNode.setUsername(grayLogBean.getUsername());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getTenant())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getTenant()) )
+                    serviceLogNode.setTenant(grayLogBean.getTenant());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getEnvironment())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getEnvironment()) )
+                    serviceLogNode.setEnvironment(grayLogBean.getEnvironment());
+
+                if( NullEmptyUtils.isNullOrEmpty(serviceLogNode.getRequesterId())
+                        && !NullEmptyUtils.isNullOrEmpty(grayLogBean.getRequesterId()) )
+                    serviceLogNode.setRequesterId(grayLogBean.getRequesterId());
             }
 
             if( !NullEmptyUtils.isNullOrEmpty(serviceLogNode.getChildren()) )
@@ -159,7 +187,7 @@ public class LogServiceImpl implements LogService {
         getLogRequestToGrayLog.setFields_in_order(Arrays.asList("className", "endpoint", "environment", "facility",
                 "full_message", "inbound_json", "ip", "loggerLevel", "logId", "message", "requesterId", "requestMethod",
                 "server", "server_fqdn", "service", "simpleClassName", "source", "StackTrace", "tenant", "timestamp",
-                "userId", "username"));
+                "userId", "username", "requestBody", "requestParams", "responseCode", "responseStatus"));
 
         String logs = graylogClient.getLogs(getBasicAuthToken(), environment.getProperty("graylog-user"),
                 getLogRequestToGrayLog);
@@ -197,10 +225,11 @@ public class LogServiceImpl implements LogService {
         getLogRequestToGrayLog.setTimerange(new GetLogRequestToGrayLog.TimeRange(0, "relative"));
         getLogRequestToGrayLog.setQuery_string(new GetLogRequestToGrayLog.Query_string("elasticsearch",
                 LogServiceImpl.requestId + ":" + serviceLogNode.getLogId()));
-        getLogRequestToGrayLog.setFields_in_order(Arrays.asList("className", "endpoint", "environment", "facility",
-                "full_message", "inbound_json", "ip", "loggerLevel", "logId", "message", "requesterId", "requestMethod",
-                "server", "server_fqdn", "service", "simpleClassName", "source", "StackTrace", "tenant", "timestamp",
-                "userId", "username"));
+        getLogRequestToGrayLog.setFields_in_order(
+                Arrays.asList("className", "endpoint", "environment", "facility", "full_message", "inbound_json", "ip",
+                        "loggerLevel", "logId", "message", "requesterId", "requestMethod", "server", "server_fqdn",
+                        "service", "simpleClassName", "source", "StackTrace", "tenant", "timestamp", "userId",
+                        "username", "requestBody", "requestParams", "responseCode", "responseStatus", "responseBody"));
 
         String logs = graylogClient.getLogs(getBasicAuthToken(), environment.getProperty("graylog-user"),
                 getLogRequestToGrayLog);

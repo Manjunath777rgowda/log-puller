@@ -17,9 +17,11 @@ public class GrayLogBean {
     private String message;
     private String userId;
     private String endpoint;
-    private String request;
-    private String response;
+    private String requestBody;
+    private String requestParams;
+    private String responseBody;
     private String responseCode;
+    private String responseStatus;
     private String environment;
     private String server_fqdn;
     private String full_message;
