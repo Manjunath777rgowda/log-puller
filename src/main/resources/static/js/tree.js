@@ -368,6 +368,8 @@ window.onload = function() {
 
 function displayData(data) {
 
+    showLoader();
+
     resetData();
 
     var element = document.getElementById("service-name-data");
@@ -607,4 +609,23 @@ function createTable(data) {
         div.style.textAlign = "center";
         div.innerHTML = "Oops!!.. No Logs Found!";
     }
+}
+
+function showLoader() {
+
+    var element = document.getElementById("loader")
+    element.classList.remove("hideLoader")
+    element.classList.add("showLoader");
+    setTimeout(() => {
+        hideLoader();
+
+    }, 500);
+
+}
+
+function hideLoader() {
+
+    var element = document.getElementById("loader")
+    element.classList.remove("showLoader")
+    element.classList.add("hideLoader");
 }
