@@ -601,6 +601,8 @@ function createTable(data) {
 
             var cell = row.insertCell(++colNumber);
             cell.innerHTML = bean.responseBody;
+            cell.style.overflow = "scroll";
+            cell.style.maxWidth = "500px";
         });
 
     } else {

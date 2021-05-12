@@ -290,3 +290,10 @@ th {
     opacity: .5;
     background: url('//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif') 50% 50% no-repeat rgb(249, 249, 249);
 }
+
+#response-data,
+#request-body-data,
+#request-params-data {
+    overflow: scroll;
+    max-width: 500px;
+}

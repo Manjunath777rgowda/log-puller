@@ -184,10 +184,11 @@ public class LogServiceImpl implements LogService {
         getLogRequestToGrayLog.setTimerange(new GetLogRequestToGrayLog.TimeRange(0, "relative"));
         getLogRequestToGrayLog.setQuery_string(
                 new GetLogRequestToGrayLog.Query_string("elasticsearch", LogServiceImpl.logIdFiled + ":" + logId));
-        getLogRequestToGrayLog.setFields_in_order(Arrays.asList("className", "endpoint", "environment", "facility",
-                "full_message", "inbound_json", "ip", "loggerLevel", "logId", "message", "requesterId", "requestMethod",
-                "server", "server_fqdn", "service", "simpleClassName", "source", "StackTrace", "tenant", "timestamp",
-                "userId", "username", "requestBody", "requestParams", "responseCode", "responseStatus"));
+        getLogRequestToGrayLog.setFields_in_order(
+                Arrays.asList("className", "endpoint", "environment", "facility", "full_message", "inbound_json", "ip",
+                        "loggerLevel", "logId", "message", "requesterId", "requestMethod", "server", "server_fqdn",
+                        "service", "simpleClassName", "source", "StackTrace", "tenant", "timestamp", "userId",
+                        "username", "requestBody", "requestParams", "responseCode", "responseStatus", "responseBody"));
 
         String logs = graylogClient.getLogs(getBasicAuthToken(), environment.getProperty("graylog-user"),
                 getLogRequestToGrayLog);
